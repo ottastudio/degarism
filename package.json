@@ -1,0 +1,31 @@
+{
+  "name": "degarism",
+  "version": "3.0.0",
+  "description": "Official Degarism Studio website",
+  "main": "index.js",
+  "author": "Taufik Oktama",
+  "license": "MIT",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
+  },
+  "dependencies": {
+    "axios": "^0.19.2",
+    "dotenv": "^8.2.0",
+    "mongoose": "^5.8.11",
+    "next": "^9.2.1",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0",
+    "swr": "^0.1.16",
+    "ts-mongoose": "^0.0.21",
+    "typestyle": "^2.0.4"
+  },
+  "devDependencies": {
+    "@types/mongoose": "^5.7.1",
+    "@types/node": "^13.7.1",
+    "@types/react": "^16.9.19",
+    "@types/react-dom": "^16.9.5",
+    "typescript": "^3.7.5"
+  }
+}

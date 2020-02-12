@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "build": {
+    "env": {
+      "MONGODB_URI": "@degarism-mongodb"
+    }
+  },
+  "regions": [
+    "sin1"
+  ]
+}
