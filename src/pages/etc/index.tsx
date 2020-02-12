@@ -4,18 +4,38 @@ import { NextPage } from "next";
 import { useAccordionContext } from "../../lib/context/AccordionContext";
 import { AccordionContainer } from "../../components/Utils/Accordion";
 
+import Card from "../../components/Utils/Card";
+
+type sectionsType = [
+  { label: string; href: string; asPath?: string | undefined }
+];
+
 const Etc: NextPage<{}> = () => {
   const {
     data: {
       titles: { TITLE_ETC }
     }
   } = useAccordionContext();
+
+  // const adminSections: sectionsType = [
+  //   { label: "Dashboard", href: "/etc/admin", asPath: undefined }
+  // ];
+  const userSections: sectionsType = [
+    { label: "Login", href: "/etc/login", asPath: undefined }
+  ];
+  const etcSections: sectionsType = [
+    { label: "FAQs", href: "/etc/faq", asPath: undefined }
+  ];
+
+  const cards = etcSections.concat(userSections);
   return (
     <AccordionContainer>
       <Head>
         <title>{TITLE_ETC}</title>
       </Head>
-      Etc
+      {cards.map(({ label, href, asPath }, i: number) => (
+        <Card key={i} href={href} asPath={asPath} label={label} />
+      ))}
     </AccordionContainer>
   );
 };
