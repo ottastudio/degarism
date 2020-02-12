@@ -13,7 +13,10 @@ const Index: NextPage<{}> = () => {
   } = useAccordionContext();
 
   const { data: siteData } = useRequest(
-    { url: "/api/v1/sites/data" },
+    {
+      url: "/api/v1/sites/data",
+      method: "GET"
+    },
     { revalidateOnFocus: true }
   );
   return (
