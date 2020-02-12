@@ -2,6 +2,7 @@ import { NextPage, NextPageContext, NextComponentType } from "next";
 import { NextRouter } from "next/router";
 import { AccordionProvider } from "../lib/context/AccordionContext";
 import { Accordion } from "../components/Utils/Accordion";
+import { PageTransition } from "next-page-transitions";
 
 interface AppProps {
   Component: NextComponentType;
@@ -13,7 +14,14 @@ const MyApp: NextPage<AppProps> = ({ Component, pageProps, router }) => {
   return (
     <AccordionProvider>
       <Accordion />
-      <Component {...pageProps} key={router.asPath} />
+      <PageTransition
+        timeout={300}
+        classNames="accordion-container"
+        tag="main"
+        skipInitialTransition={true}
+      >
+        <Component {...pageProps} key={router.asPath} />
+      </PageTransition>
 
       <style jsx global>{`
         * {
