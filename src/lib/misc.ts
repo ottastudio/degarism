@@ -6,7 +6,7 @@ export const ETC_SECTION: string[] = [
   "/etc/faq",
   "/etc/about",
   "/etc/user",
-  "/etc/user/login",
+  "/etc/login",
   "/etc/user/dashboard",
   "/etc/user/[account]",
   "/etc/products",
