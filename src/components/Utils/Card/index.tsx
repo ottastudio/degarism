@@ -18,7 +18,8 @@ const Card: React.FC<CardProps> = ({ href, asPath, label }) => {
       overflow: "hidden",
       position: "relative",
       display: "block",
-      userSelect: "none"
+      userSelect: "none",
+      color: "currentColor"
     },
     media({ maxWidth: 767 }, { height: 120 })
   );

@@ -11,6 +11,7 @@ const accordionStyle = {
   justifyContent: "space-between",
   fontSize: "2.5rem",
   fontWeight: 800,
+  textDecoration: "none",
   transition: "top 300ms cubic-bezier(1, 0, 0, 1)",
   zIndex: 1000
 };
