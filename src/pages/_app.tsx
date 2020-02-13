@@ -3,6 +3,7 @@ import { NextRouter } from "next/router";
 import { AccordionProvider } from "../lib/context/AccordionContext";
 import { Accordion } from "../components/Utils/Accordion";
 import { PageTransition } from "next-page-transitions";
+import Footer from "../components/Utils/Footer";
 
 interface AppProps {
   Component: NextComponentType;
@@ -22,6 +23,7 @@ const MyApp: NextPage<AppProps> = ({ Component, pageProps, router }) => {
       >
         <Component {...pageProps} key={router.asPath} />
       </PageTransition>
+      <Footer />
 
       <style jsx global>{`
         * {
@@ -46,8 +48,8 @@ const MyApp: NextPage<AppProps> = ({ Component, pageProps, router }) => {
         }
 
         a {
-          text-decoration: none;
-          color: currentColor;
+          /*text-decoration: none;*/
+          /*color: currentColor;*/
 
           touch-action: none;
           -webkit-tap-highlight-color: transparent;
