@@ -31,7 +31,7 @@ const siteData = async (req: NextApiRequest, res: NextApiResponse) => {
       try {
         const resUpdateFaq = await Faq.findOneAndUpdate(
           { _id: body._id },
-          { topic: body.topic, question: body.question, answer: body.answer }
+          { topic: body.topic, markup: body.markup }
         );
         const updated = await resUpdateFaq;
         return res
