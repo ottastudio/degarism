@@ -6,9 +6,11 @@ import { AccordionContainer } from "../../components/Utils/Accordion";
 
 import Card from "../../components/Utils/Card";
 
-type sectionsType = [
-  { label: string; href: string; asPath?: string | undefined }
-];
+type sectionsType = Array<{
+  label: string;
+  href: string;
+  asPath?: string | undefined;
+}>;
 
 const Etc: NextPage<{}> = () => {
   const {
@@ -17,11 +19,9 @@ const Etc: NextPage<{}> = () => {
     }
   } = useAccordionContext();
 
-  // const adminSections: sectionsType = [
-  //   { label: "Dashboard", href: "/etc/admin", asPath: undefined }
-  // ];
   const userSections: sectionsType = [
-    { label: "Login", href: "/etc/login", asPath: undefined }
+    { label: "Login", href: "/etc/login", asPath: undefined },
+    { label: "Dashboard", href: "/etc/admin/dashboard", asPath: undefined }
   ];
   const etcSections: sectionsType = [
     { label: "FAQs", href: "/etc/faq", asPath: undefined }

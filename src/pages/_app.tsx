@@ -56,6 +56,10 @@ const MyApp: NextPage<AppProps> = ({ Component, pageProps, router }) => {
           -webkit-touch-callout: none;
         }
 
+        button {
+          color: currentColor;
+        }
+
         label {
           cursor: inherit;
         }
@@ -119,6 +123,9 @@ const MyApp: NextPage<AppProps> = ({ Component, pageProps, router }) => {
             background-color: #252525;
             color: #d4d4d4;
           }
+          a {
+            color: lime;
+          }
           .theme-white {
             background-color: #d8d8d8;
             color: #1d1d1d;
@@ -144,6 +151,9 @@ const MyApp: NextPage<AppProps> = ({ Component, pageProps, router }) => {
           body {
             background-color: #f5f5f5;
             color: #0a0a0a;
+          }
+          a {
+            color: red;
           }
           .theme-white {
             background-color: #f5f5f5;
