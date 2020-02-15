@@ -1,82 +1,74 @@
 import { style, media } from "typestyle";
-
-const divstyle = style(
-  {
-    $debugName: "question-answer",
-    padding: "0px 20px 0px 20px",
-    borderBottom: "1px solid",
-    display: "flex",
-    flexWrap: "wrap",
-    marginBottom: -1
-  },
-  media({ maxWidth: 767 }, { padding: "5px 5px 0px 5px" })
-);
-const titleStyle = style(
-  {
-    $debugName: "question-answer-title",
-    width: "25%",
-    paddingTop: 20,
-    fontSize: "2.5rem",
-    fontWeight: "bold",
-    lineHeight: 0.9
-  },
-  media({ maxWidth: 767 }, { width: "100%", marginBottom: "0rem" })
-);
-const qaStyle = style(
-  {
-    $debugName: "list-container",
-    width: "75%",
-    paddingTop: 20,
-    borderLeft: "1px solid"
-  },
-  media({ maxWidth: 767 }, { width: "100%", borderLeft: "none" })
-);
-const ulStyle = style(
-  {
-    $debugName: "list-wrapper",
-    listStyle: "none",
-    position: "relative",
-    margin: "0rem 0rem 2.5rem 0rem",
-    padding: "0px 0px 0px 0.85rem"
-  },
-  media({ maxWidth: 767 }, { padding: 0, margin: "0px 0px 2rem 0px" })
-);
-const qStyle = style(
-  {
-    $debugName: "list-question",
-    fontSize: "2.5rem",
-    lineHeight: 0.9,
-    marginBottom: "0.5rem"
-  },
-  media({ maxWidth: 767 }, { fontSize: "1.5rem" })
-);
-const aStyle = style({
-  $debugName: "list-answer",
-  fontWeight: 500
-});
+import { useAppContext } from "../../../lib/context";
+import { FaqsType } from "../../../lib/interfaces/sites";
 
 export interface FaqCardProps {
-  items: any[] | undefined;
-  title: string;
+  faqs: FaqsType;
 }
 
-const FaqCard: React.FC<FaqCardProps> = ({ items, title }) => {
+const FaqCard: React.FC<FaqCardProps> = ({ faqs }) => {
+  const {
+    mediaQuery: {
+      isPhone,
+      isTablet,
+      isSmallMonitor,
+      isMediumMonitor,
+      isLargeMonitor
+    }
+  } = useAppContext();
+
+  const gridWrapper = style(
+    {
+      $debugName: "faqs-container",
+      display: "grid",
+      gridGap: 5,
+      marginBottom: -1,
+      padding: 20
+    },
+    media(isPhone, { gridTemplateColumns: "repeat(1, 1fr)", padding: 5 }),
+    media(isTablet, { gridTemplateColumns: "repeat(2, 1fr)" }),
+    media(isSmallMonitor, { gridTemplateColumns: "repeat(3, 1fr)" }),
+    media(isMediumMonitor, { gridTemplateColumns: "repeat(4, 1fr)" }),
+    media(isLargeMonitor, { gridTemplateColumns: "repeat(4, 1fr)" })
+  );
+  const divStyle = style({
+    $debugName: "faq-wrapper",
+    border: "1px solid",
+    borderRadius: 4,
+    userSelect: "none",
+    padding: "0px 10px 20px 20px",
+    position: "relative",
+    overflow: "hidden"
+  });
+  const timeStyle = style({
+    $debugName: "faq-time",
+    position: "absolute",
+    bottom: "1rem",
+    left: 20,
+    fontSize: "0.8rem"
+  });
+  const articleStyle = style({
+    $debugName: "faq-content",
+    marginTop: "1.5rem",
+    marginBottom: "2.5rem",
+    fontSize: "1.3rem",
+    position: "relative"
+  });
+
   return (
-    <div className={divstyle}>
-      <span className={titleStyle}>{title}</span>
-      <span className={qaStyle}>
-        {items?.map(({ _id, question, answer }) => (
-          <ul key={_id} className={ulStyle}>
-            <li className={qStyle}>
-              <strong>{question}</strong>
-            </li>
-            <li
-              className={aStyle}
-              dangerouslySetInnerHTML={{ __html: `"${answer}"` }}
-            />
-          </ul>
-        ))}
-      </span>
+    <div className={gridWrapper}>
+      {faqs.map(({ _id, topic, markup, updatedAt }) => (
+        <div title={topic} key={_id} className={divStyle}>
+          <time dateTime={updatedAt} className={timeStyle}>
+            {new Date(updatedAt).toLocaleDateString()} -{" "}
+            {new Date(updatedAt).toLocaleTimeString()}
+          </time>
+          <article
+            className={articleStyle}
+            dangerouslySetInnerHTML={{ __html: markup }}
+          />
+        </div>
+      ))}
     </div>
   );
 };
