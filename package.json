@@ -6,11 +6,13 @@
   "author": "Taufik Oktama",
   "license": "MIT",
   "scripts": {
-    "dev": "next dev -p 7000",
+    "dev": "rm -rf .next && next dev -p 7000",
     "build": "next build",
     "start": "next start"
   },
   "dependencies": {
+    "@ckeditor/ckeditor5-build-balloon": "^16.0.0",
+    "@ckeditor/ckeditor5-react": "^2.1.0",
     "axios": "^0.19.2",
     "dotenv": "^8.2.0",
     "mongoose": "^5.8.11",
