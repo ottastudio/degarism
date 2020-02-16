@@ -1,6 +1,6 @@
 import { NextPage, NextPageContext, NextComponentType } from "next";
 import { NextRouter } from "next/router";
-import { AccordionProvider } from "../lib/context/AccordionContext";
+import { AppProvider } from "../lib/context";
 import { Accordion } from "../components/Utils/Accordion";
 import { PageTransition } from "next-page-transitions";
 import Footer from "../components/Utils/Footer";
@@ -13,7 +13,7 @@ interface AppProps {
 
 const MyApp: NextPage<AppProps> = ({ Component, pageProps, router }) => {
   return (
-    <AccordionProvider>
+    <AppProvider>
       <Accordion />
       <PageTransition
         timeout={300}
@@ -177,7 +177,7 @@ const MyApp: NextPage<AppProps> = ({ Component, pageProps, router }) => {
           }
         }
       `}</style>
-    </AccordionProvider>
+    </AppProvider>
   );
 };
 
