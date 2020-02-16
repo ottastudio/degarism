@@ -1,4 +1,6 @@
 import { createContext, useContext } from "react";
+import { AccordionProvider } from "./AccordionContext";
+import { AuthProvider } from "./AuthContext";
 
 const phone = { minWidth: 320, maxWidth: 767 };
 const tablet = { minWidth: 768, maxWidth: 1024 };
@@ -43,7 +45,9 @@ export const AppProvider: React.FC<{}> = ({ children }) => {
         }
       }}
     >
-      {children}
+      <AuthProvider>
+        <AccordionProvider>{children}</AccordionProvider>
+      </AuthProvider>
     </AppContext.Provider>
   );
 };
