@@ -1,9 +1,11 @@
 import { Type, createSchema } from "ts-mongoose";
 
-export default createSchema(
+const faqSchema = createSchema(
   {
     topic: Type.string({ required: true }),
     markup: Type.string({ required: true })
   },
   { timestamps: { createdAt: true } }
 );
+
+export default faqSchema;
