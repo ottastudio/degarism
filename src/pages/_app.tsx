@@ -1,3 +1,4 @@
+import { memo } from "react";
 import { NextPage, NextPageContext, NextComponentType } from "next";
 import { NextRouter } from "next/router";
 import { AppProvider } from "../lib/context";
@@ -11,19 +12,23 @@ interface AppProps {
   router: NextRouter;
 }
 
+const MemoizedFooter = memo(Footer);
+const MemoizedAccordion = memo(Accordion);
+const MemoizedPageTransition = memo(PageTransition);
+
 const MyApp: NextPage<AppProps> = ({ Component, pageProps, router }) => {
   return (
     <AppProvider>
-      <Accordion />
-      <PageTransition
+      <MemoizedPageTransition
         timeout={300}
         classNames="accordion-container"
         tag="main"
         skipInitialTransition={true}
       >
         <Component {...pageProps} key={router.asPath} />
-      </PageTransition>
-      <Footer />
+      </MemoizedPageTransition>
+      <MemoizedAccordion />
+      <MemoizedFooter />
 
       <style jsx global>{`
         * {
