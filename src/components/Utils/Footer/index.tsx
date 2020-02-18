@@ -1,4 +1,4 @@
-import { default as React, Fragment } from "react";
+import React from "react";
 import { style, media } from "typestyle";
 
 const footerClassName = style(
@@ -35,20 +35,18 @@ const aStyle = style({
 const Footer: React.FC<{}> = () => {
   return (
     <footer className={footerClassName}>
-      <Fragment>
-        <div>&copy;Degarism Studio. All rights reserved.</div>
-        <div>
-          Design and built by{" "}
-          <a
-            className={aStyle}
-            href="https://ottastudio.com"
-            target="_blank"
-            rel="noopener"
-          >
-            Otta &amp; Studio's
-          </a>
-        </div>
-      </Fragment>
+      <div>&copy;Degarism Studio. All rights reserved.</div>
+      <div>
+        Design and built by{" "}
+        <a
+          className={aStyle}
+          href="https://ottastudio.com"
+          target="_blank"
+          rel="noopener"
+        >
+          Otta &amp; Studio's
+        </a>
+      </div>
     </footer>
   );
 };
