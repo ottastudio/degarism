@@ -5,12 +5,8 @@ export const ETC_SECTION: string[] = [
   "/etc/privacy",
   "/etc/faq",
   "/etc/about",
-  "/etc/user",
   "/etc/login",
-  "/etc/user/dashboard",
-  "/etc/user/[account]",
-  "/etc/products",
-  "/etc/admin/dashboard"
+  "/etc/dashboard"
 ];
 
 export const accordionData = {
