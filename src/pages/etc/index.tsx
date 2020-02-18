@@ -21,7 +21,7 @@ const Etc: NextPage<{}> = () => {
 
   const userSections: sectionsType = [
     { label: "Login", href: "/etc/login", asPath: undefined },
-    { label: "Dashboard", href: "/etc/admin/dashboard", asPath: undefined }
+    { label: "Dashboard", href: "/etc/dashboard", asPath: undefined }
   ];
   const etcSections: sectionsType = [
     { label: "FAQs", href: "/etc/faq", asPath: undefined }
