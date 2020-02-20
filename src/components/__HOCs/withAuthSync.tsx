@@ -30,9 +30,9 @@ export const withAuthSync = (WrappedComponent: any) => {
     const { token } = nextCookie(ctx);
     if (!token) {
       if (typeof window === "undefined") {
-        ctx.res?.writeHead(302, { Location: "/etc/login" }).end();
+        ctx.res?.writeHead(302, { Location: "/etc/account" }).end();
       } else {
-        Router.push("/etc/login");
+        Router.push("/etc/account");
       }
     }
 
