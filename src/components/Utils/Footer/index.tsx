@@ -14,7 +14,7 @@ const footerClassName = style(
     alignItems: "center",
     justifyContent: "space-between",
     fontSize: 13,
-    borderTop: "1px solid",
+    borderTop: "2px solid",
     zIndex: 1001,
     backgroundColor: "inherit",
     color: "inherit"
