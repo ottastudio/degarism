@@ -1,9 +1,11 @@
 import Head from "next/head";
 import { NextPage } from "next";
+import { DocumentContext } from "next/document";
 
 import { useAccordionContext } from "../../lib/context/AccordionContext";
 import { AccordionContainer } from "../../components/Utils/Accordion";
 
+import nextCookie from "next-cookies";
 import Card from "../../components/Utils/Card";
 
 type sectionsType = Array<{
@@ -12,22 +14,27 @@ type sectionsType = Array<{
   asPath?: string | undefined;
 }>;
 
-const Etc: NextPage<{}> = () => {
+const authSection: sectionsType = [
+  { label: "Dashboard", href: "/etc/dashboard", asPath: undefined }
+];
+const userSections: sectionsType = [
+  { label: "Account", href: "/etc/account", asPath: undefined }
+];
+const etcSections: sectionsType = [
+  { label: "FAQs", href: "/etc/faq", asPath: undefined }
+];
+
+const Etc: NextPage<{ token: string | undefined }> = ({ token }) => {
   const {
     data: {
       titles: { TITLE_ETC }
     }
   } = useAccordionContext();
 
-  const userSections: sectionsType = [
-    { label: "Login", href: "/etc/login", asPath: undefined },
-    { label: "Dashboard", href: "/etc/dashboard", asPath: undefined }
-  ];
-  const etcSections: sectionsType = [
-    { label: "FAQs", href: "/etc/faq", asPath: undefined }
-  ];
+  const cards = token
+    ? etcSections.concat(authSection)
+    : etcSections.concat(userSections);
 
-  const cards = etcSections.concat(userSections);
   return (
     <AccordionContainer>
       <Head>
@@ -38,6 +45,11 @@ const Etc: NextPage<{}> = () => {
       ))}
     </AccordionContainer>
   );
+};
+
+Etc.getInitialProps = async (ctx: DocumentContext) => {
+  const { token } = nextCookie(ctx);
+  return { token };
 };
 
 export default Etc;
