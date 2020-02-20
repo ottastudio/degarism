@@ -5,6 +5,7 @@ export const ETC_SECTION: string[] = [
   "/etc/privacy",
   "/etc/faq",
   "/etc/about",
+  "/etc/account",
   "/etc/login",
   "/etc/dashboard"
 ];
