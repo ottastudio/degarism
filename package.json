@@ -23,6 +23,7 @@
     "next": "^9.2.2-canary.21",
     "next-cookies": "^2.0.3",
     "next-page-transitions": "^1.0.0-beta.2",
+    "ramda": "^0.27.0",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
     "swr": "^0.1.16",
@@ -35,6 +36,7 @@
     "@types/jsonwebtoken": "^8.3.7",
     "@types/mongoose": "^5.7.1",
     "@types/node": "^13.7.1",
+    "@types/ramda": "^0.26.41",
     "@types/react": "^16.9.19",
     "@types/react-dom": "^16.9.5",
     "typescript": "^3.7.5"
