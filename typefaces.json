@@ -1,0 +1,37 @@
+[
+  {
+    "label": "Fracktif",
+    "href": "/typeface/[name]",
+    "asPath": "/typeface/fracktif"
+  },
+  {
+    "label": "Regio Mono",
+    "href": "/typeface/[name]",
+    "asPath": "/typeface/regio-mono"
+  },
+  {
+    "label": "Blimone",
+    "href": "/typeface/[name]",
+    "asPath": "/typeface/blimone"
+  },
+  {
+    "label": "Rileno Sans",
+    "href": "/typeface/[name]",
+    "asPath": "/typeface/rileno-sans"
+  },
+  {
+    "label": "Biotif",
+    "href": "/typeface/[name]",
+    "asPath": "/typeface/biotif"
+  },
+  {
+    "label": "Aktifo",
+    "href": "/typeface/[name]",
+    "asPath": "/typeface/aktifo"
+  },
+  {
+    "label": "Alliance",
+    "href": "/typeface/[name]",
+    "asPath": "/typeface/alliance"
+  }
+]
