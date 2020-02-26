@@ -6,7 +6,7 @@ import { useAccordionContext } from "../../lib/context/AccordionContext";
 import { AccordionContainer } from "../../components/Utils/Accordion";
 
 import nextCookie from "next-cookies";
-import Card from "../../components/Utils/Card";
+import CardBlock from "../../components/Utils/Card";
 
 type sectionsType = Array<{
   label: string;
@@ -40,9 +40,7 @@ const Etc: NextPage<{ token: string | undefined }> = ({ token }) => {
       <Head>
         <title>{TITLE_ETC}</title>
       </Head>
-      {cards.map(({ label, href, asPath }, i: number) => (
-        <Card key={i} href={href} asPath={asPath} label={label} />
-      ))}
+      <CardBlock items={cards} />
     </AccordionContainer>
   );
 };
