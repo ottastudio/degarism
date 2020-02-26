@@ -12,8 +12,8 @@ export const ETC_SECTION: string[] = [
 
 export const accordionData = {
   titles: {
-    TITLE_INDEX: "Degarism.",
-    TITLE_TYPEFACES: "Typefaces.",
+    TITLE_INDEX: "Dgr.",
+    TITLE_TYPEFACES: "Type.",
     TITLE_ETC: "Etc."
   }
 };
