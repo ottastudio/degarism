@@ -25,7 +25,4 @@ yarn-error.log*
 
 # utils
 .now
-dgr-firebase.json
-report.20200213.191927.3268.0.001.json
-ATLAS.MD
-faqs.txt
+.etc
