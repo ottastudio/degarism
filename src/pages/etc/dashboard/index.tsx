@@ -1,3 +1,4 @@
+import { memo, useEffect } from "react";
 import { NextPage } from "next";
 import Head from "next/head";
 import dynamic from "next/dynamic";
@@ -8,32 +9,42 @@ import useRequest from "../../../lib/hooks/useRequest";
 import { withAuthSync } from "../../../components/__HOCs/withAuthSync";
 import { AccordionContainer } from "../../../components/Utils/Accordion";
 import { useUrlOnServer } from "../../../lib/hooks/useUrlOnServer";
-import { TokenType } from "../../../lib/context/AuthContext";
+import { TokenType, useAuthContext } from "../../../lib/context/AuthContext";
 
 interface DashboardProps {
   token: TokenType;
   user: any;
 }
 
-const Admin = dynamic(() => import("../../../components/Etc/Admin"), {
+const Admin = dynamic(() => import("../../../components/Etc/Dashboard"), {
   ssr: false,
   loading: () => <div style={{ padding: 20 }}>Loading...</div>
 });
-const Dashboard: NextPage<DashboardProps> = ({ user, token }) => {
-  const { data } = useRequest(
+const MemoizedAdmin = memo(Admin);
+
+const Dashboard: NextPage<DashboardProps> = ({ token, user }) => {
+  const { setToken } = useAuthContext();
+  const { data, revalidate: revalidateProfile } = useRequest(
     {
       url: "/api/v2/users/profile",
       headers: { Authorization: JSON.stringify({ token }) }
     },
     { initialData: user }
   );
+  useEffect(() => {
+    setToken(token);
+  }, []);
 
   return (
     <AccordionContainer>
       <Head>
         <title>Dashboard</title>
       </Head>
-      <Admin user={data.profile} />
+      <div style={{ height: 98 }} />
+      <MemoizedAdmin
+        user={data.profile}
+        revalidateProfile={revalidateProfile}
+      />
     </AccordionContainer>
   );
 };
