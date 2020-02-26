@@ -19,8 +19,11 @@ export const AuthContext = createContext<AuthContextProps>({
   token: "",
   setToken: () => {}
 });
+export const AuthConsumer = AuthContext.Consumer;
+export const useAuthContext = () => useContext(AuthContext);
+
 export const AuthProvider: React.FC<{}> = ({ children }) => {
-  const [token, setToken] = useState<TokenType>(() => cookie.get("mantap"));
+  const [token, setToken] = useState<TokenType>(() => cookie.get("token"));
   useEffect(() => {
     setToken(cookie.get("token"));
   });
@@ -31,5 +34,3 @@ export const AuthProvider: React.FC<{}> = ({ children }) => {
     </AuthContext.Provider>
   );
 };
-export const AuthConsumer = AuthContext.Consumer;
-export const useAuthContext = () => useContext(AuthContext);
