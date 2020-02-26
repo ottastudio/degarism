@@ -3,21 +3,21 @@ import { style, media } from "typestyle";
 const accordionStyle = {
   overflow: "hidden",
   borderBottom: "2px solid currentColor",
-  padding: "5px 22px 0px 20px",
+  padding: "0px 22px 0px 20px",
   height: 60,
   width: "100vw",
   display: "flex",
   alignItems: "center",
   justifyContent: "space-between",
-  fontSize: "5.5rem",
+  fontSize: "4.7rem",
   fontWeight: 800,
   textDecoration: "none",
   transition: "top 300ms cubic-bezier(1, 0, 0, 1)",
-  zIndex: 1000
+  zIndex: 1000,
 };
 const accordionStyleMobile = {
   padding: "0px 5px",
-  fontSize: "2.5rem"
+  fontSize: "4.5rem"
 };
 export const indexActive = (active: boolean) =>
   style(
@@ -29,7 +29,8 @@ export const indexActive = (active: boolean) =>
       top: active ? 0 : 0,
       mixBlendMode: active ? "difference" : "normal",
       backgroundColor: active ? "#000000" : "inherit",
-      color: active ? "#ffffff" : "currentColor"
+      color: active ? "#ffffff" : "currentColor",
+      whiteSpace: 'nowrap',
     },
     media({ maxWidth: 767 }, { ...accordionStyleMobile })
   );
@@ -44,6 +45,7 @@ export const typefacesActive = (active: boolean, etc: boolean) =>
       mixBlendMode: active ? "difference" : "normal",
       backgroundColor: active ? "#000000" : "inherit",
       color: active ? "#ffffff" : "currentColor",
+      whiteSpace: 'nowrap',
       borderTop: active ? "2px solid #000000" : "2px solid currentColor"
     },
     media(
@@ -65,6 +67,7 @@ export const etcActive = (active: boolean) =>
       mixBlendMode: active ? "difference" : "normal",
       backgroundColor: active ? "#000000" : "inherit",
       color: active ? "#ffffff" : "currentColor",
+      whiteSpace: 'nowrap',
       borderTop: active ? "2px solid #000000" : "2px solid currentColor"
     },
     media(

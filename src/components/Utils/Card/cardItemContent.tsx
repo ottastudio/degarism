@@ -1,45 +1,10 @@
-import { style, keyframes, media } from "typestyle";
-
-export interface HorizontalAnimateProps {
-  label: string;
-}
-
-const HorizontalAnimate: React.FC<HorizontalAnimateProps> = ({ label }) => {
-  const slideAnimation = keyframes({
-    $debugName: "slide-animation",
-    "0%": { transform: `translate(-5%, -50%)` },
-    "50%": { transform: `translate(calc(-100% + 100vw), -50%)` },
-    "100%": { transform: `translate(-5%, -50%)` }
-  });
-  const spanStyle = style(
-    {
-      $debugName: "horizontal-animate",
-      fontSize: "10.4rem",
-      position: "absolute",
-      top: "50%",
-      fontWeight: 800,
-      animation: `${slideAnimation} 50s ease-in-out infinite`,
-      "-webkit-animation": `${slideAnimation} 50s ease-in-out infinite`,
-      $nest: {
-        "&:hover": {
-          animationPlayState: "paused",
-          "-webkit-animation-play-state": "paused"
-        }
-      }
-    },
-    media({ maxWidth: 767 }, { fontSize: "7rem" })
-  );
-  const itemStyle = (last: boolean) =>
-    style({
-      margin: last ? "0px 0px 0px 0px" : "0px 6rem 0px 0px",
-      whiteSpace: "nowrap"
-    });
+const CardItemContent: React.FC<{ label: string }> = ({ label }) => {
   return (
-    <span className={spanStyle}>
+    <span>
       {Array(10)
         .fill(label)
         .map((item: string, i: number) => (
-          <span key={i} className={itemStyle(i === Array(10).length - 1)}>
+          <span key={i} style={{ margin: "0px 3rem 0px 0px" }}>
             {item}
           </span>
         ))}
@@ -47,4 +12,4 @@ const HorizontalAnimate: React.FC<HorizontalAnimateProps> = ({ label }) => {
   );
 };
 
-export default HorizontalAnimate;
+export default CardItemContent;

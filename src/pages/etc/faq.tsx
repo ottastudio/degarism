@@ -32,7 +32,7 @@ const Faq: NextPage<{
       $debugName: "faq-title-big",
       fontSize: "13rem",
       fontWeight: "bold",
-      padding: "0rem 0.5rem 1rem 0.5rem",
+      padding: "58px 0.5rem 1rem 0.5rem",
       lineHeight: 0.9,
       userSelect: "none",
       overflow: "hidden"
