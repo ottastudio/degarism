@@ -37,7 +37,7 @@ const Footer: React.FC<{}> = () => {
     <footer className={footerClassName}>
       <div>&copy;Degarism Studio. All rights reserved.</div>
       <div>
-        Design and built by{" "}
+        By{" "}
         <a
           className={aStyle}
           href="https://ottastudio.com"
