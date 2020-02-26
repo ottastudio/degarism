@@ -1,16 +1,16 @@
-import { NextApiRequest, NextApiResponse } from "next";
 import { withDB } from "../../../../lib/database";
-import User from "../../../../lib/database/schemas/user2_schema";
 
-export default withDB(async (req: NextApiRequest, res: NextApiResponse) => {
+export default withDB(async (req, res, db) => {
   const {
     query: { token }
   } = req;
+  const { User } = db;
 
-  try {
-    await User.findOneAndUpdate({ token }, { token: "" });
-    return res.status(200).json({ success: true, message: "Logged Out" });
-  } catch (error) {
-    return res.json({ success: false, message: "Error" });
-  }
+  return User.findOneAndUpdate({ accessToken: token }, { accessToken: "" })
+    .then(() => {
+      res.status(200).json({ success: true, message: "Logged Out" });
+    })
+    .catch(err => {
+      res.status(403).send(err);
+    });
 });

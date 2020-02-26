@@ -1,31 +1,32 @@
-import { NextApiRequest, NextApiResponse } from "next";
 import { withDB } from "../../../../lib/database";
-import User from "../../../../lib/database/schemas/user2_schema";
 
-const profile = async (req: NextApiRequest, res: NextApiResponse) => {
+export default withDB(async (req, res, db) => {
+  const { User } = db;
+
   if (!req.headers.authorization) {
-    return res.json({ success: false, message: "You're not allowed!" });
+    return res.json({
+      success: false,
+      profile: null,
+      message: "You're not allowed!"
+    });
   }
 
-  try {
-    const { token } = JSON.parse(req.headers.authorization);
-    const user = await User.findOne({ token });
-    if (!user) {
-      return res.json({
-        success: false,
-        message: "Login required!",
-        profile: user
-      });
-    } else {
-      return res.json({
-        success: true,
-        message: `Hello, ${user.name}.`,
-        profile: user
-      });
-    }
-  } catch (error) {
-    throw error;
-  }
-};
-
-export default withDB(profile);
+  const { token } = await JSON.parse(req.headers.authorization);
+  return User.findOne({ accessToken: token })
+    .then(user => {
+      if (!user) {
+        res.json({
+          success: false,
+          message: "Login required!",
+          profile: null
+        });
+      } else {
+        res.json({
+          success: true,
+          message: `Hello, ${user.name.first_name}.`,
+          profile: user
+        });
+      }
+    })
+    .catch(err => res.status(401).send(err));
+});
