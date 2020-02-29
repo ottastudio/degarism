@@ -21,7 +21,8 @@ export const withDB = (
     .connect(process.env.MONGODB_URI as string, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
-      useCreateIndex: true
+      useCreateIndex: true,
+      useFindAndModify: false
     })
     .then(responseDB => {
       console.log(`🚀 CONNECTION TO MONGODB ESTABLISHED`);
