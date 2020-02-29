@@ -9,22 +9,20 @@ const LoginForm: React.FC<{}> = () => {
     values: FormikValues,
     actions: FormikHelpers<{ email: string; password: string }>
   ) => {
-    await Axios.put("/api/v2/users/login", values).then(
-      (res: AxiosResponse) => {
-        if (res.data.success) {
-          const {
-            loggedIn: { token }
-          } = res.data;
-          loginHandler(token);
-          actions.resetForm();
-        } else {
-          actions.setErrors({
-            email: res.data.message.email,
-            password: res.data.message.password
-          });
-        }
+    await Axios.put("/api/v3/user/login", values).then((res: AxiosResponse) => {
+      if (res.status === 202) {
+        const {
+          loggedIn: { accessToken }
+        } = res.data;
+        loginHandler(accessToken);
+        actions.resetForm();
+      } else {
+        actions.setErrors({
+          email: res.data.message.email,
+          password: res.data.message.password
+        });
       }
-    );
+    });
   };
 
   return (
