@@ -1,11 +1,12 @@
 import Head from "next/head";
 import { NextPage } from "next";
 import { DocumentContext } from "next/document";
+import { verify, VerifyErrors } from "jsonwebtoken";
+import nextCookie from "next-cookies";
 
 import { useAccordionContext } from "../../lib/context/AccordionContext";
 import { AccordionContainer } from "../../components/Utils/Accordion";
 
-import nextCookie from "next-cookies";
 import CardBlock from "../../components/Utils/Card";
 
 type sectionsType = Array<{
@@ -24,17 +25,16 @@ const etcSections: sectionsType = [
   { label: "FAQs", href: "/etc/faq", asPath: undefined }
 ];
 
-const Etc: NextPage<{ token: string | undefined }> = ({ token }) => {
+const Etc: NextPage<{ auth: boolean }> = ({ auth }) => {
   const {
     data: {
       titles: { TITLE_ETC }
     }
   } = useAccordionContext();
 
-  const cards = token
+  const cards = auth
     ? etcSections.concat(authSection)
     : etcSections.concat(userSections);
-
   return (
     <AccordionContainer>
       <Head>
@@ -47,7 +47,25 @@ const Etc: NextPage<{ token: string | undefined }> = ({ token }) => {
 
 Etc.getInitialProps = async (ctx: DocumentContext) => {
   const { token } = nextCookie(ctx);
-  return { token };
+  let auth: boolean = false;
+
+  try {
+    verify(
+      token as string,
+      process.env.SESSION_SECRET as string,
+      (err: VerifyErrors) => {
+        if (err) {
+          auth = false;
+        } else {
+          auth = true;
+        }
+      }
+    );
+  } catch (error) {
+    auth = false;
+  }
+
+  return { auth };
 };
 
 export default Etc;
