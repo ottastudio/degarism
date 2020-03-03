@@ -19,6 +19,10 @@ export default async (
 
   if (token === undefined) {
     return res.status(401).json({ success: false, message: "Unauthorized!" });
+  } else if (!user) {
+    return res
+      .status(403)
+      .json({ success: false, message: "You should login again!" });
   } else {
     return verify(token, secret, err => {
       if (err) {

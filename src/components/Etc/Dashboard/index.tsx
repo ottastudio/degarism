@@ -1,7 +1,7 @@
 import { ReactElement, memo, useState, useEffect } from "react";
 import Axios from "axios";
 import Router from "next/router";
-import cookie from "js-cookie";
+// import cookie from "js-cookie";
 import Link from "next/link";
 import nprogress from "nprogress";
 
@@ -46,19 +46,29 @@ const Admin: React.FC<{
   const [goodBye, setGoodBye] = useState(false);
   const logoutHandler = () => {
     nprogress.start();
-    Axios.patch(`/api/v2/users/logout?token=${user.accessToken}`)
-      .then(() => {
+    Axios.post(
+      `/api/v3/user/logout`,
+      {},
+      {
+        headers: {
+          Authorization: `Bearer ${user.accessToken}`.replace(/"/g, "")
+        }
+      }
+    )
+      .then(res => {
+        console.log(res);
         setGoodBye(true);
-        cookie.remove("token");
-        window.localStorage.setItem("logout", Date.now().toString());
+        // cookie.remove("token");
+        // window.localStorage.setItem("logout", Date.now().toString());
         setToken(undefined);
-        nprogress.done();
       })
       .then(() => {
+        nprogress.done();
         revalidateProfile();
         Router.push("/");
       });
   };
+
   const tabs =
     user !== null && user?.role === 0
       ? tabsUser.concat(tabGlobal)

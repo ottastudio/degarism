@@ -1,10 +1,10 @@
-import { FaqType } from "../../../../lib/interfaces/sites";
-import useRequest from "../../../../lib/hooks/useRequest";
-import AddFaq from "./add";
-import UpdateFaq from "./update";
+// import { FaqType } from "../../../../lib/interfaces/sites";
+// import useRequest from "../../../../lib/hooks/useRequest";
+// import AddFaq from "./add";
+// import UpdateFaq from "./update";
 
 const DashboardFaqs: React.FC<{}> = () => {
-  const { data, revalidate } = useRequest({ url: "/api/v1/sites/faq" });
+  // const { data, revalidate } = useRequest({ url: "/api/v1/sites/faq" });
   return (
     <div
       style={{
@@ -14,14 +14,14 @@ const DashboardFaqs: React.FC<{}> = () => {
         overflow: "hidden"
       }}
     >
-      <AddFaq revalidate={revalidate} />
+      {/* <AddFaq revalidate={revalidate} />
       {!data ? (
         <div style={{ padding: 20 }}>Loading data...</div>
       ) : (
         data.faqs.map((items: FaqType, i: number) => (
           <UpdateFaq key={i} index={i} items={items} revalidate={revalidate} />
         ))
-      )}
+      )} */}
 
       <style jsx global>{`
         form {

@@ -11,7 +11,7 @@ const DashboardAccount: React.FC<{}> = () => {
   if (error) return <div>Error</div>;
   return (
     <div>
-      <div>{data.profile.name}</div>
+      Dashboard Account/Profile
       <pre>{JSON.stringify(data, null, 2)}</pre>
     </div>
   );
