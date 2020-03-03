@@ -1,6 +1,7 @@
 import { createContext, useContext } from "react";
 import { usePathChecker } from "../../hooks/usePathChecker";
 import { useDocTitle } from "../../hooks/useDocTitle";
+import { SubpageContextProvider } from "../SubPageContext";
 import {
   INDEX_SECTION,
   TYPEFACES_SECTION,
@@ -33,9 +34,11 @@ export const AccordionContext = createContext<AccordionProps>({
   data: {
     titles: { TITLE_INDEX: "", TITLE_TYPEFACES: "", TITLE_ETC: "" },
     labels: { LABEL_INDEX: "", LABEL_TYPEFACES: "", LABEL_ETC: "" },
-    actives: { ACTIVE_INDEX: true, ACTIVE_TYPEFACES: true, ACTIVE_ETC: true }
+    actives: { ACTIVE_INDEX: true, ACTIVE_TYPEFACES: false, ACTIVE_ETC: false }
   }
 });
+export const AccordionConsumer = AccordionContext.Consumer;
+export const useAccordionContext = () => useContext(AccordionContext);
 
 export const AccordionProvider: React.FC<{}> = ({ children }) => {
   const { title } = useDocTitle();
@@ -55,20 +58,17 @@ export const AccordionProvider: React.FC<{}> = ({ children }) => {
     labels: {
       LABEL_INDEX: accordionData.titles.TITLE_INDEX,
       LABEL_TYPEFACES: TYPEFACES_TITLE_SLUG
-        ? `Typefaces / ${title}`
+        ? `☞${title.replace(/-/g, " ")}.`
         : accordionData.titles.TITLE_TYPEFACES,
       LABEL_ETC: ETC_TITLE_SLUG
         ? accordionData.titles.TITLE_ETC
-        : `Etc / ${title}`
+        : `☞${title.replace(/-/g, " ")}.`
     }
   };
 
   return (
     <AccordionContext.Provider value={{ data }}>
-      {children}
+      <SubpageContextProvider>{children}</SubpageContextProvider>
     </AccordionContext.Provider>
   );
 };
-
-export const AccordionConsumer = AccordionContext.Consumer;
-export const useAccordionContext = () => useContext(AccordionContext);

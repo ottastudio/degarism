@@ -1,9 +1,19 @@
-import { Type, createSchema } from "ts-mongoose";
+import { Schema, model, models } from "mongoose";
+import { IFaqModel, IFaqDocument } from "../../../../global";
 
-export default createSchema(
+const faqSchema: Schema<IFaqDocument> = new Schema(
   {
-    topic: Type.string({ required: true }),
-    markup: Type.string({ required: true })
+    topic: {
+      type: String,
+      required: true
+    },
+    markup: {
+      type: String,
+      required: true
+    }
   },
   { timestamps: { createdAt: true } }
 );
+
+export const Faq: IFaqModel =
+  models.Faq || model<IFaqDocument>("Faq", faqSchema);

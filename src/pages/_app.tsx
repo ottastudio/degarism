@@ -1,9 +1,11 @@
+import { memo } from "react";
 import { NextPage, NextPageContext, NextComponentType } from "next";
 import { NextRouter } from "next/router";
-import { AccordionProvider } from "../lib/context/AccordionContext";
+import { AppProvider } from "../lib/context";
 import { Accordion } from "../components/Utils/Accordion";
 import { PageTransition } from "next-page-transitions";
 import Footer from "../components/Utils/Footer";
+import NProgress from "../components/Utils/Loader/NProgress";
 
 interface AppProps {
   Component: NextComponentType;
@@ -11,24 +13,31 @@ interface AppProps {
   router: NextRouter;
 }
 
+const MemoizedFooter = memo(Footer);
+const MemoizedAccordion = memo(Accordion);
+const MemoizedPageTransition = memo(PageTransition);
+const MemoizedNProgress = memo(NProgress);
+
 const MyApp: NextPage<AppProps> = ({ Component, pageProps, router }) => {
   return (
-    <AccordionProvider>
-      <Accordion />
-      <PageTransition
+    <AppProvider>
+      <MemoizedPageTransition
         timeout={300}
         classNames="accordion-container"
         tag="main"
         skipInitialTransition={true}
       >
         <Component {...pageProps} key={router.asPath} />
-      </PageTransition>
-      <Footer />
+      </MemoizedPageTransition>
+      <MemoizedAccordion />
+      <MemoizedFooter />
+      <MemoizedNProgress />
 
       <style jsx global>{`
         * {
           box-sizing: border-box;
           outline: none;
+          scroll-behavior: smooth;
 
           -webkit-font-smoothing: antialiased;
           -moz-osx-font-smoothing: grayscale;
@@ -43,8 +52,6 @@ const MyApp: NextPage<AppProps> = ({ Component, pageProps, router }) => {
           color: #0a0a0a;
           transition: background-color cubic-bezier(1, 0, 0, 1),
             color cubic-bezier(1, 0, 0, 1);
-
-          scroll-behavior: smooth;
         }
 
         a {
@@ -90,13 +97,13 @@ const MyApp: NextPage<AppProps> = ({ Component, pageProps, router }) => {
           background-color: #ffff00;
           color: #0a0af5;
         }
-        .accordion-container-enter {
+        .accordion-container-enter,
+        .accordion-container-enter-active {
           opacity: 0;
         }
-        .accordion-container-enter-active,
         .accordion-container-enter-done {
           opacity: 1;
-          transition: opacity 300ms cubic-bezier(1, 0, 0, 1);
+          transition: 300ms cubic-bezier(1, 0, 0.5, 1);
         }
         .accordion-container-exit-active,
         .accordion-container-exit-done {
@@ -177,7 +184,7 @@ const MyApp: NextPage<AppProps> = ({ Component, pageProps, router }) => {
           }
         }
       `}</style>
-    </AccordionProvider>
+    </AppProvider>
   );
 };
 

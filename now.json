@@ -2,7 +2,8 @@
   "version": 2,
   "build": {
     "env": {
-      "MONGODB_URI": "@degarism-mongodb"
+      "MONGODB_URI": "@degarism-mongodb",
+      "SESSION_SECRET": "@degarism-session-secret"
     }
   },
   "regions": [

@@ -1,4 +1,4 @@
-import { default as React, Fragment } from "react";
+import React from "react";
 import { style, media } from "typestyle";
 
 const footerClassName = style(
@@ -14,7 +14,7 @@ const footerClassName = style(
     alignItems: "center",
     justifyContent: "space-between",
     fontSize: 13,
-    borderTop: "1px solid",
+    borderTop: "2px solid",
     zIndex: 1001,
     backgroundColor: "inherit",
     color: "inherit"
@@ -35,20 +35,18 @@ const aStyle = style({
 const Footer: React.FC<{}> = () => {
   return (
     <footer className={footerClassName}>
-      <Fragment>
-        <div>&copy;Degarism Studio. All rights reserved.</div>
-        <div>
-          Design and built by{" "}
-          <a
-            className={aStyle}
-            href="https://ottastudio.com"
-            target="_blank"
-            rel="noopener"
-          >
-            Otta &amp; Studio's
-          </a>
-        </div>
-      </Fragment>
+      <div>&copy;Degarism Studio. All rights reserved.</div>
+      <div>
+        By{" "}
+        <a
+          className={aStyle}
+          href="https://ottastudio.com"
+          target="_blank"
+          rel="noopener"
+        >
+          Otta &amp; Studio's
+        </a>
+      </div>
     </footer>
   );
 };

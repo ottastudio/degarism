@@ -1,6 +1,7 @@
 import { useTabContext } from "../../../lib/context/TabContext";
 import { TabsProps } from ".";
 import { style } from "typestyle";
+import Link from "next/link";
 
 export interface TabBarProps {
   tabs: TabsProps;
@@ -15,7 +16,7 @@ const TabBar: React.SFC<TabBarProps> = ({ tabs }) => {
     display: "grid",
     gridTemplateColumns: `repeat(${repeat}, 1fr)`,
     position: "sticky",
-    top: 177,
+    top: 176,
     zIndex: 10,
     borderBottom: "1px solid",
     overflow: "hidden",
@@ -37,13 +38,15 @@ const TabBar: React.SFC<TabBarProps> = ({ tabs }) => {
   return (
     <div className={tabBarWrapper}>
       {tabs.map(({ tab }) => (
-        <button
-          className={buttonStyle(activeTab === tab)}
-          key={tab}
-          onClick={() => setActiveTab(tab)}
-        >
-          {tab}
-        </button>
+        <Link href={`/etc/dashboard?tab=${tab}`} key={tab}>
+          <a
+            key={tab}
+            className={buttonStyle(activeTab === tab)}
+            onClick={() => setActiveTab(tab)}
+          >
+            {tab}
+          </a>
+        </Link>
       ))}
     </div>
   );

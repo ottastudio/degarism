@@ -1,34 +1,21 @@
-import Link from "next/link";
-import { style, media } from "typestyle";
-import HorizontalAnimate from "./horizontalAnimate";
+import CardItem from "./cardItem";
 
-export interface CardProps {
-  href: string;
-  asPath?: string | undefined;
-  label: string;
-}
+export type CardProps = { label: string; href: string; asPath?: string };
 
-const Card: React.FC<CardProps> = ({ href, asPath, label }) => {
-  const linkClass = style(
-    {
-      $debugName: "card-link",
-      height: 180,
-      borderBottom: "1px solid",
-      marginTop: -1,
-      overflow: "hidden",
-      position: "relative",
-      display: "block",
-      userSelect: "none",
-      color: "currentColor"
-    },
-    media({ maxWidth: 767 }, { height: 120 })
-  );
+const Card: React.FC<{ items: CardProps[] }> = ({ items }) => {
   return (
-    <Link href={href} as={asPath}>
-      <a className={linkClass}>
-        <HorizontalAnimate label={label} />
-      </a>
-    </Link>
+    <div className="card-block">
+      {items.map(({ label, href, asPath }, i: number) => (
+        <CardItem key={i} href={href} asPath={asPath} label={label} />
+      ))}
+      <style jsx>{`
+        .card-block {
+          position: relative;
+          padding-top: 58px;
+          overflow-x: hidden;
+        }
+      `}</style>
+    </div>
   );
 };
 

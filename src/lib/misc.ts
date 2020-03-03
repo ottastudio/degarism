@@ -5,18 +5,15 @@ export const ETC_SECTION: string[] = [
   "/etc/privacy",
   "/etc/faq",
   "/etc/about",
-  "/etc/user",
+  "/etc/account",
   "/etc/login",
-  "/etc/user/dashboard",
-  "/etc/user/[account]",
-  "/etc/products",
-  "/etc/admin/dashboard"
+  "/etc/dashboard"
 ];
 
 export const accordionData = {
   titles: {
-    TITLE_INDEX: "Degarism.",
-    TITLE_TYPEFACES: "Typefaces.",
+    TITLE_INDEX: "Dgr.",
+    TITLE_TYPEFACES: "Type.",
     TITLE_ETC: "Etc."
   }
 };

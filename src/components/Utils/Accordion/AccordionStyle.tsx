@@ -2,22 +2,22 @@ import { style, media } from "typestyle";
 
 const accordionStyle = {
   overflow: "hidden",
-  borderBottom: "1px solid currentColor",
+  borderBottom: "2px solid currentColor",
   padding: "0px 22px 0px 20px",
   height: 60,
   width: "100vw",
   display: "flex",
   alignItems: "center",
   justifyContent: "space-between",
-  fontSize: "2.5rem",
+  fontSize: "4.7rem",
   fontWeight: 800,
   textDecoration: "none",
   transition: "top 300ms cubic-bezier(1, 0, 0, 1)",
-  zIndex: 1000
+  zIndex: 1000,
 };
 const accordionStyleMobile = {
   padding: "0px 5px",
-  fontSize: "1.5rem"
+  fontSize: "4.5rem"
 };
 export const indexActive = (active: boolean) =>
   style(
@@ -29,7 +29,8 @@ export const indexActive = (active: boolean) =>
       top: active ? 0 : 0,
       mixBlendMode: active ? "difference" : "normal",
       backgroundColor: active ? "#000000" : "inherit",
-      color: active ? "#ffffff" : "currentColor"
+      color: active ? "#ffffff" : "currentColor",
+      whiteSpace: 'nowrap',
     },
     media({ maxWidth: 767 }, { ...accordionStyleMobile })
   );
@@ -40,16 +41,17 @@ export const typefacesActive = (active: boolean, etc: boolean) =>
       $debugName: "accordion-typefaces",
       position: "fixed",
       textTransform: "capitalize",
-      top: active || etc ? 59 : "calc(100vh - 157px)",
+      top: active || etc ? 58 : "calc(100vh - 156px)",
       mixBlendMode: active ? "difference" : "normal",
       backgroundColor: active ? "#000000" : "inherit",
       color: active ? "#ffffff" : "currentColor",
-      borderTop: active ? "1px solid #000000" : "1px solid currentColor"
+      whiteSpace: 'nowrap',
+      borderTop: active ? "2px solid #000000" : "2px solid currentColor"
     },
     media(
       { maxWidth: 767 },
       {
-        top: active || etc ? 59 : "calc(100vh - 118px)",
+        top: active || etc ? 58 : "calc(100vh - 116px)",
         ...accordionStyleMobile
       }
     )
@@ -61,16 +63,17 @@ export const etcActive = (active: boolean) =>
       $debugName: "accordion-etc",
       position: "fixed",
       textTransform: "capitalize",
-      top: active ? 117 : "calc(100vh - 98px)",
+      top: active ? 116 : "calc(100vh - 98px)",
       mixBlendMode: active ? "difference" : "normal",
       backgroundColor: active ? "#000000" : "inherit",
       color: active ? "#ffffff" : "currentColor",
-      borderTop: active ? "1px solid #000000" : "1px solid currentColor"
+      whiteSpace: 'nowrap',
+      borderTop: active ? "2px solid #000000" : "2px solid currentColor"
     },
     media(
       { maxWidth: 767 },
       {
-        top: active ? 117 : "calc(100vh - 59px)",
+        top: active ? 116 : "calc(100vh - 58px)",
         ...accordionStyleMobile
       }
     )

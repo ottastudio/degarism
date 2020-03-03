@@ -1,10 +1,13 @@
 import Head from "next/head";
 import { NextPage } from "next";
+import { DocumentContext } from "next/document";
+import { verify, VerifyErrors } from "jsonwebtoken";
+import nextCookie from "next-cookies";
 
 import { useAccordionContext } from "../../lib/context/AccordionContext";
 import { AccordionContainer } from "../../components/Utils/Accordion";
 
-import Card from "../../components/Utils/Card";
+import CardBlock from "../../components/Utils/Card";
 
 type sectionsType = Array<{
   label: string;
@@ -12,32 +15,57 @@ type sectionsType = Array<{
   asPath?: string | undefined;
 }>;
 
-const Etc: NextPage<{}> = () => {
+const authSection: sectionsType = [
+  { label: "Dashboard", href: "/etc/dashboard", asPath: undefined }
+];
+const userSections: sectionsType = [
+  { label: "Account", href: "/etc/account", asPath: undefined }
+];
+const etcSections: sectionsType = [
+  { label: "FAQs", href: "/etc/faq", asPath: undefined }
+];
+
+const Etc: NextPage<{ auth: boolean }> = ({ auth }) => {
   const {
     data: {
       titles: { TITLE_ETC }
     }
   } = useAccordionContext();
 
-  const userSections: sectionsType = [
-    { label: "Login", href: "/etc/login", asPath: undefined },
-    { label: "Dashboard", href: "/etc/admin/dashboard", asPath: undefined }
-  ];
-  const etcSections: sectionsType = [
-    { label: "FAQs", href: "/etc/faq", asPath: undefined }
-  ];
-
-  const cards = etcSections.concat(userSections);
+  const cards = auth
+    ? etcSections.concat(authSection)
+    : etcSections.concat(userSections);
   return (
     <AccordionContainer>
       <Head>
         <title>{TITLE_ETC}</title>
       </Head>
-      {cards.map(({ label, href, asPath }, i: number) => (
-        <Card key={i} href={href} asPath={asPath} label={label} />
-      ))}
+      <CardBlock items={cards} />
     </AccordionContainer>
   );
+};
+
+Etc.getInitialProps = async (ctx: DocumentContext) => {
+  const { token } = nextCookie(ctx);
+  let auth: boolean = false;
+
+  try {
+    verify(
+      token as string,
+      process.env.SESSION_SECRET as string,
+      (err: VerifyErrors) => {
+        if (err) {
+          auth = false;
+        } else {
+          auth = true;
+        }
+      }
+    );
+  } catch (error) {
+    auth = false;
+  }
+
+  return { auth };
 };
 
 export default Etc;
